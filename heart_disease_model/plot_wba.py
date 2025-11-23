@@ -122,47 +122,6 @@ for x, y in iter(train_loader):
     label_vals_5.extend(y.tolist())
 
 
-# define parameters to plot wba
-# global parameters for ROC Curve plot
-
-P_to_N_ratios_powers = np.arange(-3, 4)
-P_to_N_ratios_powers = np.array([-3, 0, 3])
-P_to_N_ratios_powers = np.array([3])
-P_to_N_ratios = 2.0 ** P_to_N_ratios_powers
-number_of_ratios = len(P_to_N_ratios_powers)
-plot_colors_roc = [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.5, 0.5]]
-plot_colors_roc = [0.0, 0.0, 0.0]
-
-linestyle = ':'
-
-TPR_range = np.arange(0.0, 1.02, 0.02)
-TNR_range = np.arange(0.0, 1.02, 0.02)
-TPR, TNR = np.meshgrid(TPR_range, TNR_range)
-
-face_alpha = 0.5
-line_width = 4.0
-
-# Create contours for grid
-X = TPR
-Y = TNR
-line_width_grid = 2.0
-grid_color = [0.2, 0.2, 0.2]
-grid_levels = 4
-ticks = np.arange(0.0, 1.2, 0.2)
-
-# Plot options
-use_wba = 1
-use_f1score = 1
-use_mcc = 1
-use_fbscore = 1
-dot_size = 12
-
-
-numel = 51
-num_el_factor = 1 / (numel - 1)
-mid_el = (numel + 1) // 2
-X_vals = np.linspace(0, 1, numel)
-
 thresholds = np.arange(0, 1.02, 0.02)
 tprs_1, fprs_1, tnrs_1, fnrs_1 = get_tpr_fpr(model = model_1, 
                       data_loader = val_loader, 
