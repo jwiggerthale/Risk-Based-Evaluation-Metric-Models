@@ -44,21 +44,23 @@ test_set = lung_dataset(im_files = test_files,
 val_set = lung_dataset(im_files = val_files, 
                          transform = transform_test)
 
-train_loader = DataLoader(train_set, batch_size = 32, shuffle = True)
-val_loader = DataLoader(val_set, batch_size = 32, shuffle = False)
-test_loader = DataLoader(test_set, batch_size = 32, shuffle = False)
-
-
 model_name = 'resnet_3_classes'
 if 'vgg' in model_name.lower():
     model = VGG16(num_classes=3)
     model.freeze_weights()
+    batch_size = 32
 elif 'resnet' in model_name.lower():
     model = resnet18(num_classes=3)
     model.freeze_weights(layers = [1,2,3])
+    batch_size = 32
 elif 'resnext' in model_name.lower():
     model = resnext50(num_classes=3)
     model.freeze_weights(layers = [1,2,3])
+    batch_size = 32
+
+train_loader = DataLoader(train_set, batch_size = batch_size, shuffle = True)
+val_loader = DataLoader(val_set, batch_size = batch_size, shuffle = False)
+test_loader = DataLoader(test_set, batch_size = batch_size, shuffle = False)
 
 
 model = model.to('cuda')
