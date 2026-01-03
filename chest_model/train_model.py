@@ -48,7 +48,7 @@ model_name = 'resnet_3_classes'
 if 'vgg' in model_name.lower():
     model = VGG16(num_classes=3)
     model.freeze_weights()
-    batch_size = 32
+    batch_size = 16
 elif 'resnet' in model_name.lower():
     model = resnet18(num_classes=3)
     model.freeze_weights(layers = [1,2,3])
